@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:composition template="../layout.xhtml">
+		<ui:define name="conteudo">
+			<p:panel header="Marcas">
+				<h:form>
+					<p:growl />
+					<h:inputHidden value="#{marcaController.marca.idMarca}" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="Descrição: " />
+						<p:inputText value="#{marcaController.marca.descricao}" />
+					</h:panelGrid>
+					
+					<p:commandButton value="Salvar"
+	  								 actionListener="#{marcaController.salvar()}"
+	  								 update="@form" />
+	  								 
+	  				<p:dataTable value="#{marcaController.todas()}"
+	  							 var="marca"
+	  							 paginator="true"
+	  							 rows="10"
+	  							 emptyMessage="Nenhum modelo foi cadastrado">
+	  				
+	  					<p:column headerText="Código da Marca"> #{marca.idMarca}</p:column>
+	  					<p:column headerText="Descrição"> #{marca.descricao}</p:column>
+	  					
+	  					<p:column headerText="Editar">
+	  						<p:commandButton value="Editar"
+	  										 actionListener="#{marcaController.editar(marca)}"
+	  										 update="@form" process="@this"/>
+	  						</p:column>
+	  						
+	  						<p:column headerText="Excluir">	
+	  							<p:commandButton value="Excluir"
+	  								actionListener="#{marcaController.excluir(marca.idMarca)}"
+	  								update="@form" process="@this" />
+	  						</p:column>	  				
+	  				</p:dataTable>
+				</h:form>
+			</p:panel>
+		</ui:define>	
+	</ui:composition>
+</html>

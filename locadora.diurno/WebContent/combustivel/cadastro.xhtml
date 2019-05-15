@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:composition template="../layout.xhtml">
+		<ui:define name="conteudo">
+			<p:panel header="Combustíveis">
+				<h:form>
+					<p:growl />
+					<h:inputHidden value="#{combustivelController.combustivel.idCombustivel}" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="Descrição: " />
+						<p:inputText value="#{combustivelController.combustivel.descricao}" />
+					</h:panelGrid>	
+					
+					<p:commandButton value="Salvar"
+							  		 actionListener="#{combustivelController.salvar()}"
+	  								 update="@form" />	
+	  								 
+	  				<p:dataTable value="#{combustivelController.listarCombustiveis()}"
+	  							 var="combustivel"
+	  							 paginator="true"
+	  							 rows="10"
+	  							 emptyMessage="Nenhum combustível foi cadastrado">
+	  							 
+	  					<p:column headerText="Código do Combustivel"> #{combustivel.idMarca}</p:column>
+	  					<p:column headerText="Descrição"> #{combustivel.descricao}</p:column>
+	  					
+	  					<p:column headerText="Editar">
+	  						<p:commandButton value="Editar"
+	  										 actionListener="#{combustivelController.editar(combustivel)}"
+	  										 update="@form" process="@this"/>
+	  						</p:column>
+	  						
+	  						<p:column headerText="Excluir">	
+	  							<p:commandButton value="Excluir"
+	  								actionListener="#{combustivelController.excluir(combustivel.idMarca)}"
+	  								update="@form" process="@this" />
+	  					</p:column>	
+	  				</p:dataTable>
+				</h:form>
+			</p:panel>		
+		</ui:define>
+	</ui:composition>
+		
+		
+</html>

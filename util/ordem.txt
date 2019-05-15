@@ -1,0 +1,4 @@
+-> dao -> interface dao => DAL -> Data Access Layer
+-> EJB -> interface EJB => BLL -> Business Logic Layer
+-> controller
+-> view

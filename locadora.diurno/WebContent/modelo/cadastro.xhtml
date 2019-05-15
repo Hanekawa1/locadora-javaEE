@@ -1,0 +1,41 @@
+<!-- Bibliotecas de tags personalizadas para design html -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	  <ui:composition template="../layout.xhtml">
+	  	<ui:define name="conteudo">
+	  		<p:panel header="Modelos">
+	  			<h:form>
+	  				<p:growl />	  				
+	  				<h:inputHidden value="#{modeloController.modelo.idModelo}"/>
+	  				<!-- o bloco de código java (similar a Razor) acessa os atributos por meio dos getters e setters, implicitamente -->
+	  				<h:panelGrid columns="2">
+	  					<p:outputLabel value="Descrição:"/>
+	  					<p:inputText value="#{modeloController.modelo.descricao}"/>
+	  					
+	  					<p:outputLabel value="Marca:"/>
+	  					<p:selectOneMenu value="#{modeloController.modelo.marca}" filter="true" converter="entityConverter">
+	  						
+	  						<f:selectItems value="#{marcaController.todas()}" var="marca" itemLabel="#{marca.descricao}" itemValue="#{marca}"/>
+	  					</p:selectOneMenu>
+	  				</h:panelGrid>
+	  				<p:commandButton value="Salvar" actionListener="#{modeloController.salvar()}" update="@form"/>
+	  				<p:dataTable value="#{modeloController.todos()}" var="modelo" paginator="true" row="10" emptyMessage="Nenhum modelo foi cadastrado">
+	  					<p:column headerText="Código">#{modelo.idModelo}</p:column>
+	  					<p:column headerText="Descrição">#{modelo.descricao}</p:column>
+	  					<p:column headerText="Marca">#{modelo.marca.descricao}</p:column>
+	  					<p:column headerText="Editar">
+	  						<p:commandButton value="Editar" actionListener="#{modeloController.editar(modelo)}" update="@form" process="@this"/>
+	  					</p:column>
+	  					<p:column headerText="Excluir">
+	  						<p:commandButton value="Excluir" actionListener="#{modeloController.excluir(modelo.idModelo)}" update="@form" process="@this"/>
+	  					</p:column>
+	  				</p:dataTable>
+	  			</h:form>
+	  		</p:panel>
+	  	</ui:define>
+	  </ui:composition>
+</html>
