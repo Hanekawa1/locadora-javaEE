@@ -11,7 +11,6 @@ public class Opcional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Short idOpcional;
 	
-	//colocar os validadores
 	private String descricao;
 	
 	

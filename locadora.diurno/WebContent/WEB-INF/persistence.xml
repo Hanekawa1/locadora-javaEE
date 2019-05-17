@@ -10,9 +10,12 @@
 		<class>locadora.diurno.dal.entidade.Opcional</class>
 		<class>locadora.diurno.dal.entidade.Cor</class>
 		<class>locadora.diurno.dal.entidade.Combustivel</class>
-		<class>locadora.diurno.dal.entidade.Pessoa</class>
-		<class>locadora.diurno.dal.entidade.Usuario</class>
+		<class>locadora.diurno.dal.entidade.Locacao</class>
 		<class>locadora.diurno.dal.entidade.Funcionario</class>
+		<class>locadora.diurno.dal.entidade.Usuario</class>
+		<class>locadora.diurno.dal.entidade.Pessoa</class>
+		<class>locadora.diurno.dal.entidade.LocacaoAutomovel</class>
+		
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE"/>
 			<property name="eclipselink.logging.parameters" value="true"/>

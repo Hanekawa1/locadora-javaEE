@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	  <ui:composition template="../layout.xhtml">
+	  
+	  	<ui:define name="conteudo">
+	  	
+	  		<p:panel header="Cors">
+	  		
+	  			<h:form>
+	  			
+	  				<p:growl />
+	  			
+	  				<h:inputHidden value="#{corController.cor.idCor}" />
+	  			
+	  				<h:panelGrid columns="2">
+	  				
+	  					<p:outputLabel value="Descrição:" />
+	  					<p:inputText value="#{corController.cor.descricao}" />	
+	  			
+
+	  				</h:panelGrid>
+	  				
+	  				<p:commandButton value="Salvar"
+	  								 actionListener="#{corController.salvar()}"
+	  								 update="@form" />
+	  			
+	  				<p:dataTable value="#{corController.todos()}"
+	  							 var="cor"
+	  							 paginator="true"
+	  							 rows="10"
+	  							 emptyMessage="Nenhum cor foi cadastrado">
+	  				
+	  						<p:column headerText="Código">
+	  							#{cor.idCor}	  						
+	  						</p:column>
+	  						
+	  						<p:column headerText="Descrição">
+	  							#{cor.descricao}
+	  						</p:column>
+	  						
+	  				
+	  						
+	  						<p:column headerText="Editar">
+	  						
+	  							<p:commandButton value="Editar"
+	  								actionListener="#{corController.editar(cor)}"
+	  								process="@this"
+	  								update="@form"/>
+	  						
+	  						</p:column>
+	  						
+	  						<p:column headerText="Excluir">
+	  							
+	  							<p:commandButton value="Excluir"
+	  								actionListener="#{corController.excluir(cor.idCor)}"
+	  								process="@this"
+	  								update="@form" />
+	  							
+	  						</p:column>
+	  				
+	  				</p:dataTable>
+	  				
+	  			</h:form>
+	  		
+	  		</p:panel>
+	  	
+	  	</ui:define>
+	  
+	  </ui:composition>
+
+</html>

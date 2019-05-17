@@ -4,28 +4,34 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
-	  
+
 	<h:head>
 		<title>Locadora</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="viewport" 
+			content="width=device-width,initial-scale=1.0"/>
 	</h:head>
 	
 	<h:body>
+	
 		<p:menubar>
 			<p:submenu label="Cadastros">
-				<p:menuitem value="Marca" url="marca/cadastro.xhtml"/>
-				<p:menuitem value="Modelo" url="modelo/cadastro.xhtml"/>
-				<p:menuitem value="Combustível" url="combustivel/cadastro.xhtml"/>
+				<p:menuitem value="Marca" url="/marca/cadastro.xhtml" />
+				<p:menuitem value="Modelo" url="/modelo/cadastro.xhtml" />
+				<p:menuitem value="Cor" url="/cor/cadastro.xhtml" />
+				<p:menuitem value="Opcional" url="/opcional/cadastro.xhtml" />
+				<p:menuitem value="Combustivel" url="/combustivel/cadastro.xhtml" />
+				<p:menuitem value="Automovel" url="/automovel/cadastro.xhtml" />
 			</p:submenu>
-			
 		</p:menubar>
-		
+	
 		<div id="conteudo">
 			<ui:insert name="conteudo"/>
 		</div>
+	
 		
+		<footer>
 		
-		<footer></footer>
+		</footer>
+	
 	</h:body>
-
 </html>

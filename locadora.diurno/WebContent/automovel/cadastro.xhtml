@@ -1,0 +1,154 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	  <ui:composition template="../layout.xhtml">
+	  
+	  	<ui:define name="conteudo">
+	  	
+	  		<p:panel header="Automoveis">
+	  		
+	  			<h:form>
+	  			
+	  				<p:growl />
+	  			
+	  				<h:inputHidden value="#{automovelController.automovel.idAutomovel}" />
+	  			
+	  				<h:panelGrid columns="2">
+	  				
+	  					<p:outputLabel value="Modelo:" />
+	  					<p:selectOneMenu value="#{automovelController.automovel.modelo}" 
+	  									 filter="true"
+	  									 converter="entityConverter">
+	  						
+	  						<f:selectItems value="#{modeloController.todos()}"
+	  									   var="modelo"
+	  									   itemLabel="#{modelo.descricao}"
+	  									   itemValue="#{modelo}" />
+	  									   
+	  					</p:selectOneMenu>
+	  					
+	  					<p:outputLabel value="Combustivel:" />
+	  					<p:selectOneMenu value="#{automovelController.automovel.combustivel}" 
+	  									 filter="true"
+	  									 converter="entityConverter">
+	  						
+	  						<f:selectItems value="#{combustivelController.todos()}"
+	  									   var="combustivel"
+	  									   itemLabel="#{combustivel.descricao}"
+	  									   itemValue="#{combustivel}" />
+	  									   
+	  					</p:selectOneMenu>
+	  					
+	  					<p:outputLabel value="Cor:" />
+	  					<p:selectOneMenu value="#{automovelController.automovel.cor}" 
+	  									 filter="true"
+	  									 converter="entityConverter">
+	  						
+	  						<f:selectItems value="#{corController.todos()}"
+	  									   var="cor"
+	  									   itemLabel="#{cor.descricao}"
+	  									   itemValue="#{cor}" />
+	  									   
+	  					</p:selectOneMenu>
+	  				
+	  					<p:outputLabel value="Ano:" />
+	  					<p:inputMask mask="9999" value="#{automovelController.automovel.ano}" />	
+	  					
+	  					<p:outputLabel value="Valor:" />
+	  					<p:inputText value="#{automovelController.automovel.valor}"/>	
+	  					
+	  					<p:outputLabel value="Qtd. Portas:" />
+	  					<p:inputText value="#{automovelController.automovel.quantidadePortas}" />	
+	  					
+	  					<p:outputLabel value="Opcionais: " />
+	  					<p:selectCheckboxMenu value="#{automovelController.automovel.opcionais}"
+	  										  converter="entityConverter"
+	  										  label="Opcionais">
+	  					<f:selectItems value="#{opcionalController.todos()}"
+	  								   var="o"
+	  								   itemLabel="#{o.descricao}"
+	  								   itemValue="#{o}"/>
+	  						
+	  					
+	  					</p:selectCheckboxMenu>
+	  					
+	  				</h:panelGrid>
+	  				
+	  				<p:commandButton value="Salvar"
+	  								 actionListener="#{automovelController.salvar()}"
+	  								 update="@form" />
+	  			
+	  				<p:dataTable value="#{automovelController.todos()}"
+	  							 var="automovel"
+	  							 paginator="true"
+	  							 rows="10"
+	  							 emptyMessage="Nenhum automovel foi cadastrado">
+	  				
+	  						<p:column headerText="Código">
+	  							#{automovel.idAutomovel}	  						
+	  						</p:column>
+	  						
+	  						<p:column headerText="Ano">
+	  							#{automovel.ano}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Valor">
+	  							#{automovel.valor}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Qtd. Portas">
+	  							#{automovel.quantidadePortas}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Modelo">
+	  							#{automovel.modelo.marca.descricao} - #{automovel.modelo.descricao}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Cor">
+	  							#{automovel.cor.descricao}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Combustivel">
+	  							#{automovel.combustivel.descricao}
+	  						</p:column>
+	  						
+	  						<p:column headerText="Opcionais">
+	  							<ul>
+	  								<ui:repeat var="opcional" value="#{automovel.opcionais}">
+	  									<li>#{opcional.descricao}</li>
+	  								</ui:repeat>
+	  							</ul>
+	  						</p:column>
+	  						
+	  						<p:column headerText="Editar">
+	  						
+	  							<p:commandButton value="Editar"
+	  								actionListener="#{automovelController.editar(automovel)}"
+	  								process="@this"
+	  								update="@form"/>
+	  						
+	  						</p:column>
+	  						
+	  						<p:column headerText="Excluir">
+	  							
+	  							<p:commandButton value="Excluir"
+	  								actionListener="#{automovelController.excluir(automovel.idAutomovel)}"
+	  								process="@this"
+	  								update="@form" />
+	  							
+	  						</p:column>
+	  				
+	  				</p:dataTable>
+	  				
+	  			</h:form>
+	  		
+	  		</p:panel>
+	  	
+	  	</ui:define>
+	  
+	  </ui:composition>
+
+</html>

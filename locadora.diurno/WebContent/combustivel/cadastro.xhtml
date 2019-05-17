@@ -3,47 +3,72 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	  <ui:composition template="../layout.xhtml">
+	  
+	  	<ui:define name="conteudo">
+	  	
+	  		<p:panel header="Combustiveis">
+	  		
+	  			<h:form>
+	  			
+	  				<p:growl />
+	  			
+	  				<h:inputHidden value="#{combustivelController.combustivel.idCombustivel}" />
+	  			
+	  				<h:panelGrid columns="2">
+	  				
+	  					<p:outputLabel value="Descrição:" />
+	  					<p:inputText value="#{combustivelController.combustivel.descricao}" />	
+	  				
 
-	<ui:composition template="../layout.xhtml">
-		<ui:define name="conteudo">
-			<p:panel header="Combustíveis">
-				<h:form>
-					<p:growl />
-					<h:inputHidden value="#{combustivelController.combustivel.idCombustivel}" />
-					<h:panelGrid columns="1">
-						<p:outputLabel value="Descrição: " />
-						<p:inputText value="#{combustivelController.combustivel.descricao}" />
-					</h:panelGrid>	
-					
-					<p:commandButton value="Salvar"
-							  		 actionListener="#{combustivelController.salvar()}"
-	  								 update="@form" />	
-	  								 
-	  				<p:dataTable value="#{combustivelController.listarCombustiveis()}"
+	  				</h:panelGrid>
+	  				
+	  				<p:commandButton value="Salvar"
+	  								 actionListener="#{combustivelController.salvar()}"
+	  								 update="@form" />
+	  			
+	  				<p:dataTable value="#{combustivelController.todos()}"
 	  							 var="combustivel"
 	  							 paginator="true"
 	  							 rows="10"
-	  							 emptyMessage="Nenhum combustível foi cadastrado">
-	  							 
-	  					<p:column headerText="Código do Combustivel"> #{combustivel.idMarca}</p:column>
-	  					<p:column headerText="Descrição"> #{combustivel.descricao}</p:column>
-	  					
-	  					<p:column headerText="Editar">
-	  						<p:commandButton value="Editar"
-	  										 actionListener="#{combustivelController.editar(combustivel)}"
-	  										 update="@form" process="@this"/>
+	  							 emptyMessage="Nenhum combustivel foi cadastrado">
+	  				
+	  						<p:column headerText="Código">
+	  							#{combustivel.idCombustivel}	  						
 	  						</p:column>
 	  						
-	  						<p:column headerText="Excluir">	
+	  						<p:column headerText="Descrição">
+	  							#{combustivel.descricao}
+	  						</p:column>
+
+	  						
+	  						<p:column headerText="Editar">
+	  						
+	  							<p:commandButton value="Editar"
+	  								actionListener="#{combustivelController.editar(combustivel)}"
+	  								process="@this"
+	  								update="@form"/>
+	  						
+	  						</p:column>
+	  						
+	  						<p:column headerText="Excluir">
+	  							
 	  							<p:commandButton value="Excluir"
-	  								actionListener="#{combustivelController.excluir(combustivel.idMarca)}"
-	  								update="@form" process="@this" />
-	  					</p:column>	
+	  								actionListener="#{combustivelController.excluir(combustivel.idCombustivel)}"
+	  								process="@this"
+	  								update="@form" />
+	  							
+	  						</p:column>
+	  				
 	  				</p:dataTable>
-				</h:form>
-			</p:panel>		
-		</ui:define>
-	</ui:composition>
-		
-		
+	  				
+	  			</h:form>
+	  		
+	  		</p:panel>
+	  	
+	  	</ui:define>
+	  
+	  </ui:composition>
+
 </html>

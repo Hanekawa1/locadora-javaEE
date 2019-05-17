@@ -4,9 +4,9 @@ import javax.persistence.*;
 
 @Entity
 public class LocacaoAutomovel {
-	
+
 	@EmbeddedId
-	private LocacaoAutomovelPK id;
+	private LocacaoAutomovelPk id;
 	
 	private Double valor;
 	
@@ -20,11 +20,11 @@ public class LocacaoAutomovel {
 	@MapsId("idLocacao")
 	private Locacao locacao;
 
-	public LocacaoAutomovelPK getId() {
+	public LocacaoAutomovelPk getId() {
 		return id;
 	}
 
-	public void setId(LocacaoAutomovelPK id) {
+	public void setId(LocacaoAutomovelPk id) {
 		this.id = id;
 	}
 
@@ -76,6 +76,8 @@ public class LocacaoAutomovel {
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 }

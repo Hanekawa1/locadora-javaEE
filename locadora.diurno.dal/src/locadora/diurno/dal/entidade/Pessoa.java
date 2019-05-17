@@ -1,14 +1,19 @@
 package locadora.diurno.dal.entidade;
 
 import javax.persistence.*;
-import java.util.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="tipo", 
+		discriminatorType = DiscriminatorType.CHAR)
 public class Pessoa {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idpessoa;
+	private Integer idPessoa;
 	
 	private String nome;
 	
@@ -19,7 +24,7 @@ public class Pessoa {
 	
 	@OneToMany(mappedBy="pessoa")
 	private List<Locacao> locacoes;
-	
+
 	public List<Locacao> getLocacoes() {
 		return locacoes;
 	}
@@ -28,12 +33,12 @@ public class Pessoa {
 		this.locacoes = locacoes;
 	}
 
-	public Integer getIdpessoa() {
-		return idpessoa;
+	public Integer getIdPessoa() {
+		return idPessoa;
 	}
 
-	public void setIdpessoa(Integer idpessoa) {
-		this.idpessoa = idpessoa;
+	public void setIdPessoa(Integer idPessoa) {
+		this.idPessoa = idPessoa;
 	}
 
 	public String getNome() {
@@ -64,7 +69,7 @@ public class Pessoa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idpessoa == null) ? 0 : idpessoa.hashCode());
+		result = prime * result + ((idPessoa == null) ? 0 : idPessoa.hashCode());
 		return result;
 	}
 
@@ -77,10 +82,10 @@ public class Pessoa {
 		if (getClass() != obj.getClass())
 			return false;
 		Pessoa other = (Pessoa) obj;
-		if (idpessoa == null) {
-			if (other.idpessoa != null)
+		if (idPessoa == null) {
+			if (other.idPessoa != null)
 				return false;
-		} else if (!idpessoa.equals(other.idpessoa))
+		} else if (!idPessoa.equals(other.idPessoa))
 			return false;
 		return true;
 	}

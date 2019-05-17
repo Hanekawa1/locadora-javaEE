@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import locadora.diurno.bll.interfaces.IModeloEJB;
 import locadora.diurno.bll.util.Mensagem;
-import locadora.diurno.bll.util.MensagemStatus;
+import locadora.diurno.bll.util.TipoMensagem;
 import locadora.diurno.dal.dao.interfaces.IModeloDAO;
 import locadora.diurno.dal.entidade.Modelo;
 
@@ -25,10 +25,10 @@ public class ModeloEJB implements IModeloEJB {
 			modeloDAO.insertOrUpdate(modelo);
 		}catch(Exception ex) {
 			return new Mensagem("Ocorreu um erro inesperado: " 
-						+ ex.getMessage(),MensagemStatus.erro);
+						+ ex.getMessage(),TipoMensagem.erro);
 		}
 		
-		return new Mensagem("Salvo com sucesso.", MensagemStatus.sucesso);
+		return new Mensagem("Salvo com sucesso.", TipoMensagem.sucesso);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class ModeloEJB implements IModeloEJB {
 		
 		try {
 			
-			Modelo modelo = obterPorId(idModelo);
+			Modelo modelo = modeloDAO.findById(idModelo);
 			
 			if(modelo == null) {
 				throw new Exception("Modelo inexistente.");
@@ -51,21 +51,17 @@ public class ModeloEJB implements IModeloEJB {
 			
 		}catch(Exception ex) {
 			return new Mensagem("Não foi possível excluir: " 
-					+ ex.getMessage(), MensagemStatus.erro);
+					+ ex.getMessage(), TipoMensagem.erro);
 		}
 		
 		return new Mensagem("Excluído com sucesso.",
-				MensagemStatus.sucesso);
+				TipoMensagem.sucesso);
 		
 	}
 
-	@Override
-	public Modelo obterPorId(Short idModelo) {
-		return modeloDAO.findById(idModelo);
-	}
 
 	@Override
-	public List<Modelo> obterTodos() {
+	public List<Modelo> listar() {
 		return modeloDAO.findAll();
 	}
 

@@ -1,7 +1,7 @@
 package locadora.diurno.dal.entidade;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 import java.util.*;
 
@@ -12,19 +12,30 @@ public class Automovel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAutomovel;
 	
+	@NotNull(message = "Informe o ano")
 	private Integer ano;
 	
+	@NotNull(message = "Informe o valor")
 	private Double valor;
 	
+	@NotNull(message = "Informe a quantidade de portas")
+	@Min(value = 1, message = "Quantidade de portas inválida." )
 	private Short quantidadePortas;
 	
+	@NotNull(message = "Informe a cor")
 	@ManyToOne
 	@JoinColumn(name = "idCor")
 	private Cor cor;
 	
+	@NotNull(message = "Informe o modelo")
 	@ManyToOne
 	@JoinColumn(name = "idModelo")
 	private Modelo modelo;
+	
+	@NotNull(message = "Informe o combustível")
+	@ManyToOne
+	@JoinColumn(name = "idCombustivel")
+	private Combustivel combustivel;
 	
 	
 	@ManyToMany
@@ -32,15 +43,11 @@ public class Automovel {
 			joinColumns = @JoinColumn(name = "idAutomovel"),
 			inverseJoinColumns = @JoinColumn(name = "idOpcional"))
 	private List<Opcional> opcionais;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idCombustivel")
-	@NotNull(message = "O combustivel é obrigatório")
-	private Combustivel combustivel;
 	
 	@OneToMany(mappedBy = "automovel")
 	private List<LocacaoAutomovel> locacaoAutomoveis;
 
+	
 	public List<LocacaoAutomovel> getLocacaoAutomoveis() {
 		return locacaoAutomoveis;
 	}
@@ -48,26 +55,6 @@ public class Automovel {
 
 	public void setLocacaoAutomoveis(List<LocacaoAutomovel> locacaoAutomoveis) {
 		this.locacaoAutomoveis = locacaoAutomoveis;
-	}
-
-
-	public Modelo getModelo() {
-		return modelo;
-	}
-
-
-	public Combustivel getCombustivel() {
-		return combustivel;
-	}
-
-
-	public void setCombustivel(Combustivel combustivel) {
-		this.combustivel = combustivel;
-	}
-
-
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
 	}
 
 
@@ -131,6 +118,26 @@ public class Automovel {
 	}
 
 
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+
+
+	public Combustivel getCombustivel() {
+		return combustivel;
+	}
+
+
+	public void setCombustivel(Combustivel combustivel) {
+		this.combustivel = combustivel;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -156,5 +163,8 @@ public class Automovel {
 			return false;
 		return true;
 	}
+	
+		
+	
 	
 }

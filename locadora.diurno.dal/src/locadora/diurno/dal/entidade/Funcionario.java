@@ -4,12 +4,14 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue(value = "F")
-@PrimaryKeyJoinColumn(name = "idPessoaFuncionario", referencedColumnName = "idPessoa")
-public class Funcionario extends Pessoa{
-	
+@PrimaryKeyJoinColumn(name = "idPessoaFuncionario",
+		referencedColumnName="idPessoa")
+public class Funcionario extends Pessoa {
+
 	private Double salario;
 	
-	@OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "funcionario",
+			cascade = CascadeType.ALL)
 	private Usuario usuario;
 
 	public Double getSalario() {

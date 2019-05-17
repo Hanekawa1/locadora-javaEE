@@ -1,8 +1,12 @@
 package locadora.diurno.dal.entidade;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.util.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Combustivel {
@@ -11,15 +15,11 @@ public class Combustivel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Short idCombustivel;
 	
-	@NotNull(message = "Campo descrição é obrigatório")
-	@Size(max = 50, message = "O campo descrição pode ter no máximo 50 caracteres")
 	private String descricao;
-
 	
-	@OneToMany(mappedBy = "combustivel", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "combustivel")
 	private List<Automovel> automoveis;
-	
-	//Getters, Setters, Hashcode & Equals
+
 	public Short getIdCombustivel() {
 		return idCombustivel;
 	}
@@ -68,4 +68,6 @@ public class Combustivel {
 			return false;
 		return true;
 	}
+	
+	
 }

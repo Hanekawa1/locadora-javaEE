@@ -1,27 +1,27 @@
 package locadora.diurno.dal.entidade;
 
 import javax.persistence.*;
+
 import java.util.*;
 
 @Entity
 public class Locacao {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idLocacao;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
 	@ManyToOne
-	@JoinColumn(name = "idPessoa")
+	@JoinColumn(name="idPessoa")
 	private Pessoa pessoa;
 	
 	@OneToMany(mappedBy = "locacao")
 	private List<LocacaoAutomovel> locacaoAutomoveis;
 
-	
-	
+
 	public List<LocacaoAutomovel> getLocacaoAutomoveis() {
 		return locacaoAutomoveis;
 	}
@@ -78,5 +78,6 @@ public class Locacao {
 			return false;
 		return true;
 	}
-
+	
+	
 }

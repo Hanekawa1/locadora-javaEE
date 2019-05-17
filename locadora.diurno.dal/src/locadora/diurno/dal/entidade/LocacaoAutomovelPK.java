@@ -3,8 +3,8 @@ package locadora.diurno.dal.entidade;
 import javax.persistence.*;
 
 @Embeddable
-public class LocacaoAutomovelPK {
-	
+public class LocacaoAutomovelPk {
+
 	private Integer idLocacao;
 	private Integer idAutomovel;
 	
@@ -36,7 +36,7 @@ public class LocacaoAutomovelPK {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LocacaoAutomovelPK other = (LocacaoAutomovelPK) obj;
+		LocacaoAutomovelPk other = (LocacaoAutomovelPk) obj;
 		if (idAutomovel == null) {
 			if (other.idAutomovel != null)
 				return false;
@@ -49,5 +49,7 @@ public class LocacaoAutomovelPK {
 			return false;
 		return true;
 	}
+	
+	
 	
 }

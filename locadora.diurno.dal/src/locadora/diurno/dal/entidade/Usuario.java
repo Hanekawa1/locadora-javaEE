@@ -5,8 +5,10 @@ import javax.persistence.*;
 @Entity
 public class Usuario {
 
+	
 	@Id
-	@Column(name = "idPessoaUsuario", insertable = false, updatable = false)
+	@Column(name="idPessoaUsuario",
+		insertable = false, updatable = false)
 	private Integer idPessoaUsuario;
 	
 	private String login;
@@ -14,7 +16,8 @@ public class Usuario {
 	private String senha;
 	
 	@OneToOne
-	@JoinColumn(name = "idPessoaUsuario", referencedColumnName = "idPessoaFuncionario")
+	@JoinColumn(name="idPessoaUsuario",
+			referencedColumnName="idPessoaFuncionario")
 	private Funcionario funcionario;
 
 	public Integer getIdPessoaUsuario() {
@@ -48,5 +51,6 @@ public class Usuario {
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
+	
 	
 }

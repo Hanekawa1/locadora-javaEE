@@ -6,7 +6,6 @@ import java.util.*;
 
 public interface IModeloDAO
 		extends IGenericDAO<Modelo, Short>{
-	
+
 	public List<Modelo> findByMarca(String nomeMarca);
-	public List<Modelo> findMarca();
 }

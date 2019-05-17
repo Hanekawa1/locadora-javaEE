@@ -48,6 +48,14 @@ public class Modelo {
 		this.marca = marca;
 	}
 
+	public List<Automovel> getAutomoveis() {
+		return automoveis;
+	}
+
+	public void setAutomoveis(List<Automovel> automoveis) {
+		this.automoveis = automoveis;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,13 +80,5 @@ public class Modelo {
 			return false;
 		return true;
 	}
-
-	public List<Automovel> getAutomoveis() {
-		return automoveis;
-	}
-
-	public void setAutomoveis(List<Automovel> automoveis) {
-		this.automoveis = automoveis;
-	}
-
+	
 }
