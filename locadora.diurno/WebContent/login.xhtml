@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	  
+	  <ui:composition template="layout.xhtml">
+	  
+	  		<ui:define name="conteudo">
+	  		
+	  			<p:panel header="Autenticação">
+	  			
+	  				<h:form>
+	  				
+	  					<p:growl />
+	  					
+	  					
+	  					<h:panelGrid columns="2">
+	  					
+	  						<p:outputLabel value="Login:" />
+	  						<p:inputText value="#{autenticacaoController.usuario.login}" />
+	  					
+	  						<p:outputLabel value="Senha:" />
+	  						<p:password value="#{autenticacaoController.usuario.senha}" />
+	  					
+	  					</h:panelGrid>
+	  					
+	  					<p:commandButton value="Entrar" 
+	  						actionListener="#{autenticacaoController.autenticar()}"
+	  						update="@form" />
+	  				
+	  				</h:form>
+	  			
+	  			</p:panel>
+	  		
+	  		
+	  		</ui:define>
+	  
+	  </ui:composition>
+	
+
+</html>

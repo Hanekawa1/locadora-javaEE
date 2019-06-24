@@ -63,15 +63,16 @@
 	  					<p:outputLabel value="Qtd. Portas:" />
 	  					<p:inputText value="#{automovelController.automovel.quantidadePortas}" />	
 	  					
-	  					<p:outputLabel value="Opcionais: " />
+	  					<p:outputLabel value="Opcionais:" />
 	  					<p:selectCheckboxMenu value="#{automovelController.automovel.opcionais}"
-	  										  converter="entityConverter"
-	  										  label="Opcionais">
-	  					<f:selectItems value="#{opcionalController.todos()}"
-	  								   var="o"
-	  								   itemLabel="#{o.descricao}"
-	  								   itemValue="#{o}"/>
-	  						
+	  							converter="entityConverter"
+	  							label="Opcionais">
+	  							
+	  							<f:selectItems value="#{opcionalController.todos()}"
+	  								var="o"
+	  								itemLabel="#{o.descricao}"
+	  								itemValue="#{o}" />
+	  							
 	  					
 	  					</p:selectCheckboxMenu>
 	  					
@@ -116,12 +117,19 @@
 	  						</p:column>
 	  						
 	  						<p:column headerText="Opcionais">
+	  						
 	  							<ul>
+	  								
 	  								<ui:repeat var="opcional" value="#{automovel.opcionais}">
+	  									
 	  									<li>#{opcional.descricao}</li>
+	  									
 	  								</ui:repeat>
+	  							
 	  							</ul>
+	  						
 	  						</p:column>
+	  						
 	  						
 	  						<p:column headerText="Editar">
 	  						

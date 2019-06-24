@@ -12,18 +12,37 @@
 	</h:head>
 	
 	<h:body>
-	
-		<p:menubar>
-			<p:submenu label="Cadastros">
-				<p:menuitem value="Marca" url="/marca/cadastro.xhtml" />
-				<p:menuitem value="Modelo" url="/modelo/cadastro.xhtml" />
-				<p:menuitem value="Cor" url="/cor/cadastro.xhtml" />
-				<p:menuitem value="Opcional" url="/opcional/cadastro.xhtml" />
-				<p:menuitem value="Combustivel" url="/combustivel/cadastro.xhtml" />
-				<p:menuitem value="Automovel" url="/automovel/cadastro.xhtml" />
-			</p:submenu>
-		</p:menubar>
-	
+
+		<h:form>
+		
+			<p:menubar rendered="#{autenticacaoController.usuarioAutenticado}">
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Marca" url="/marca/cadastro.xhtml" />
+					<p:menuitem value="Modelo" url="/modelo/cadastro.xhtml" />
+					<p:menuitem value="Cor" url="/cor/cadastro.xhtml" />
+					<p:menuitem value="Opcional" url="/opcional/cadastro.xhtml" />
+					<p:menuitem value="Combustivel" url="/combustivel/cadastro.xhtml" />
+					<p:menuitem value="Automovel" url="/automovel/cadastro.xhtml" />
+				</p:submenu>
+				
+				<p:submenu label="Pessoas">
+					<p:menuitem value="Funcionário" 
+						url="/funcionario/cadastro.xhtml" />
+				</p:submenu>
+				
+				<p:submenu label="Locação">
+					<p:menuitem value="Cadastro" 
+						url="/locacao/registrar.xhtml" />
+					<p:menuitem value="Consulta" 
+						url="/locacao/consulta.xhtml" />
+					<p:menuitem value="Gráfico" 
+						url="/locacao/graficoLinha.xhtml" />
+				</p:submenu>
+				<p:menuitem value="Sair" actionListener="#{autenticacaoController.sair()}" />
+				<p:menuitem value="#{autenticacaoController.usuario.login}" />
+				
+			</p:menubar>
+		</h:form>
 		<div id="conteudo">
 			<ui:insert name="conteudo"/>
 		</div>

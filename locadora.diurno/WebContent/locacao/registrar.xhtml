@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="../layout.xhtml">
+
+        <ui:define name="conteudo">
+
+            <h:form id="formulario">
+
+                <p:panel header="Locacao">
+                    <p:growl id="mensagem"/>
+
+
+                    <h:inputHidden value="#{locacaoController.locacao.idLocacao}" />
+
+
+                    <h:panelGrid columns="2">
+
+                        <h:outputLabel value="Data de Início:" />
+                        <p:calendar pattern="dd/MM/yyyy"
+                                    value="#{locacaoController.locacao.data}" />
+
+
+
+                        <h:outputLabel value="Cliente:" />
+                        <p:selectOneMenu value="#{locacaoController.locacao.pessoa}" converter="entityHerancaConverter">
+                            <f:selectItem itemLabel="Selecione um Cliente" itemValue="" />
+                            <f:selectItems value="#{pessoaController.todos()}" var="c"
+                                           itemLabel="#{c.nome}" itemValue="#{c}" />
+                        </p:selectOneMenu>
+
+
+                    </h:panelGrid>
+
+
+
+                </p:panel>
+
+                <br/><br/>
+
+                <p:panel header="Selecionar">
+
+                    <h:panelGrid columns="2">
+
+
+                        <h:outputLabel value="Automovel:" />
+                        <p:selectOneMenu value="#{locacaoController.locacaoAutomovel.automovel}"
+                                         converter="entityConverter">
+                            <f:selectItem itemLabel="Selecione um Automovel" itemValue="" />
+                            <f:selectItems value="#{automovelController.todos()}" var="v"
+                                           itemLabel="#{v.modelo.marca.descricao} - #{v.modelo.descricao} - #{v.ano}" itemValue="#{v}" />
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel value="Valor:" />
+                        <p:inputText value="#{locacaoController.locacaoAutomovel.valor}" />
+
+                        <p:commandButton 
+                            actionListener="#{locacaoController.adicionar()}" update="@form:automovelAdicionados, @form:mensagem"
+                            icon="ui-icon-plus" />
+
+                    </h:panelGrid>
+
+                </p:panel>
+
+
+                <p:panel header="Veículos Adicionados" id="automovelAdicionados">
+
+                    <p:dataTable value="#{locacaoController.locacao.locacaoAutomoveis}" var="l"
+                                 emptyMessage="Nenhum veículo adicionado" paginator="true" rows="20">
+
+
+                        <p:column headerText="Marca" style="width:10%">
+                            #{l.automovel.modelo.marca.descricao}
+                        </p:column>
+
+                        <p:column headerText="Modelo" style="width:20%">
+                            #{l.automovel.modelo.descricao}
+                        </p:column>
+
+                        <p:column headerText="Valor" style="width:10%">
+                            #{l.valor}
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+
+                <br/><br/>
+                <p:commandButton value="Salvar"
+                                 actionListener="#{locacaoController.salvar()}" update="@form"
+                                 icon="ui-icon-check" />
+
+            </h:form>
+
+
+
+        </ui:define>
+
+    </ui:composition>
+
+
+
+</html>

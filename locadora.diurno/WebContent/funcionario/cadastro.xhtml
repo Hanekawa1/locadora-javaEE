@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+	
+	<ui:composition template="../layout.xhtml">
+	
+		<ui:define name="conteudo">
+		
+		
+			<p:panel header="Funcionários">
+			
+				<h:form>
+				
+					<p:growl />
+					
+					<h:inputHidden value="#{funcionarioController.funcionario.idPessoa}" />
+				
+					<h:panelGrid columns="2">
+					
+						<p:outputLabel value="Nome" />
+						<p:inputText value="#{funcionarioController.funcionario.nome}" />
+					
+						<p:outputLabel value="CPF"/>
+						<p:inputMask mask="999.999.999-99"    
+							value="#{funcionarioController.funcionario.cpfMascara}" />
+							
+						<p:outputLabel value="Data de Nascimento" />
+						<p:calendar pattern="dd/MM/yyyy"
+								value="#{funcionarioController.funcionario.dataNascimento}" />
+						
+						
+						<p:outputLabel value="Salário"/>
+						<p:inputText value="#{funcionarioController.funcionario.salario}" />
+					
+						<p:outputLabel value="Login" />
+						<p:inputText value="#{funcionarioController.funcionario.usuario.login}" />
+					
+						<p:outputLabel value="Senha" />
+						<p:password value="#{funcionarioController.funcionario.usuario.senha}"
+								feedback="true"
+								weakLabel="Senha fraca"
+								goodLabel="Senha boa"
+								strongLabel="Senha forte"/>
+					
+					</h:panelGrid>
+					
+					<p:commandButton value="Salvar"
+							actionListener="#{funcionarioController.salvar()}"
+							update="@form"/>
+							
+					<p:dataTable value="#{funcionarioController.listar()}"
+								var="funcionario">
+						
+						<p:column headerText="Código">
+							#{funcionario.idPessoa}
+						</p:column>
+						
+						<p:column headerText="Nome">
+							#{funcionario.nome}
+						</p:column>
+						
+						<p:column headerText="CPF">
+							#{funcionario.cpfMascara}
+						</p:column>
+						
+						<p:column headerText="Data de Nascimento">
+							
+							<h:outputText value="#{funcionario.dataNascimento}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+							
+						</p:column>
+						
+						<p:column headerText="Salário">
+							#{funcionario.salario}
+						</p:column>
+						
+						<p:column headerText="Login">
+							#{funcionario.usuario.login}
+						</p:column>
+					
+					</p:dataTable>
+				
+				</h:form>
+			
+			</p:panel>
+		
+		
+		</ui:define>
+	
+	</ui:composition>
+
+
+</html>

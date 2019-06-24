@@ -10,5 +10,6 @@ public interface IAutomovelEJB {
 	public Mensagem salvar(Automovel automovel);
 	public Mensagem excluir(Integer idAutomovel);
 	public List<Automovel> listar();
+	public Automovel obter(Integer idAutomovel);
 	
 }

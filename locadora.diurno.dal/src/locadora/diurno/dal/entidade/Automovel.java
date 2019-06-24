@@ -1,7 +1,8 @@
 package locadora.diurno.dal.entidade;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import java.util.*;
 
@@ -18,26 +19,26 @@ public class Automovel {
 	@NotNull(message = "Informe o valor")
 	private Double valor;
 	
-	@NotNull(message = "Informe a quantidade de portas")
-	@Min(value = 1, message = "Quantidade de portas inválida." )
+	@NotNull(message = "Informe a qtd. de portas")
+	@Min(value = 1, message = "Quantidade de portas inválida.")
 	private Short quantidadePortas;
 	
-	@NotNull(message = "Informe a cor")
 	@ManyToOne
 	@JoinColumn(name = "idCor")
+	@NotNull(message = "Informe a cor")
 	private Cor cor;
 	
-	@NotNull(message = "Informe o modelo")
 	@ManyToOne
 	@JoinColumn(name = "idModelo")
+	@NotNull(message = "Informe o modelo")
 	private Modelo modelo;
 	
-	@NotNull(message = "Informe o combustível")
 	@ManyToOne
 	@JoinColumn(name = "idCombustivel")
+	@NotNull(message = "Informe a combustivel")
 	private Combustivel combustivel;
 	
-	
+
 	@ManyToMany
 	@JoinTable(name = "AutomovelOpcional",
 			joinColumns = @JoinColumn(name = "idAutomovel"),

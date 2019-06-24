@@ -63,4 +63,10 @@ public class AutomovelEJB implements IAutomovelEJB{
 		return automovelDAO.findAll();
 	}
 
+	@Override
+	public Automovel obter(Integer idAutomovel) {
+		// TODO Auto-generated method stub
+		return automovelDAO.findById(idAutomovel);
+	}
+
 }

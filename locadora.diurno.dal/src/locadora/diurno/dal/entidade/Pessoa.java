@@ -1,6 +1,7 @@
 package locadora.diurno.dal.entidade;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,10 @@ public class Pessoa {
 	private String nome;
 	
 	private Long cpf;
+	
+	@Transient
+	@NotNull(message = "Informe o CPF")
+	private String cpfMascara;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
@@ -63,6 +68,34 @@ public class Pessoa {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+	
+
+	public String getCpfMascara() {
+		
+		if(cpfMascara == null && cpf != null) {
+			
+			cpfMascara = cpf.toString();
+			
+			while(cpfMascara.length() != 11) {	
+				cpfMascara = "0" + cpfMascara;	
+			}
+			
+			cpfMascara = cpfMascara.substring(0, 3)
+						+ "." 
+						+ cpfMascara.substring(3,6)
+						+ "."
+						+ cpfMascara.substring(6, 9)
+						+ "-"
+						+ cpfMascara.substring(9, 11);
+						
+		}
+		
+		return cpfMascara;
+	}
+
+	public void setCpfMascara(String cpfMascara) {
+		this.cpfMascara = cpfMascara;
 	}
 
 	@Override
